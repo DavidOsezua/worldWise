@@ -48,3 +48,22 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+import React from "react";
+import ReactDom from "react-dom";
+import { Children } from "react";
+import { HiXMark } from "react-icons/hi2";
+
+export const Modal = ({ children, onClose }) => {
+  return ReactDom.createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>,
+    document.getElementById("portal")
+  );
+};

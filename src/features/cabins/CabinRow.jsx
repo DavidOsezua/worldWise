@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
-import { deleteCabins } from "../../services/apiCabins";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { useCreateCabin } from "./useCreateCabin";
+import { formatCurrency } from "../../utils/helpers";
 // import { formatCurrency } from "../../utils/helpers";
 
 const TableRow = styled.div`
@@ -89,7 +89,7 @@ const CabinRow = ({ cabin }) => {
           <button disabled={isCreating} onClick={handleDuplicate}>
             <HiSquare2Stack />
           </button>
-          <button onClick={() => setShowForm((show) => !show)}>
+          <button onClick={() => setShowEditForm((show) => !show)}>
             <HiPencil />
           </button>
           <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
@@ -97,7 +97,7 @@ const CabinRow = ({ cabin }) => {
           </button>
         </div>
       </TableRow>
-      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+      {showEditForm && <CreateCabinForm cabinForEdit={cabin} />}
     </>
   );
 };

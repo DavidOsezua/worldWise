@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { getCabins } from "../services/apiCabins";
-import { data } from "react-router-dom";
 import CabinTable from "../features/cabins/CabinTable";
-import Button from "../ui/Button";
-import CreateCabinForm from "../features/cabins/CreateCabinForm";
+import AddCabin from "../features/cabins/AddCabin";
+
+//Keep the pages folder with less logic.
 
 function Cabins() {
-  const [showForm, setShowForm] = useState(false);
-
   // useEffect(() => {
   //   getCabins().then((data) => console.log(data));
   // }, []);
@@ -23,9 +20,7 @@ function Cabins() {
 
       <Row>
         <CabinTable />
-
-        <Button onClick={() => setShowForm((prev) => !prev)}>Add Cabin</Button>
-        {showForm && <CreateCabinForm />}
+        <AddCabin />
       </Row>
     </>
   );

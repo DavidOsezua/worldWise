@@ -1,6 +1,21 @@
 import supabase from "./supabase";
 import { supabaseUrl } from "./supabase";
 
+//If I am not using supaBase
+// export async function getCabins() {
+//   try {
+//     const response = await fetch("https://your-api-endpoint/cabins");
+//     if (!response.ok) {
+//       throw new Error("Cabins could not be loaded");
+//     }
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// }
+
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
 
@@ -51,6 +66,11 @@ export async function getCabins() {
 //This Function below combines the Creation of the cabin and the editing of the cabin
 export async function createEditCabin(newCabin, id) {
   console.log(newCabin);
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    ""
+  );
+
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
   const imagePath = hasImagePath
